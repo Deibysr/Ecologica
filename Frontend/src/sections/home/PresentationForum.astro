@@ -1,0 +1,32 @@
+---
+import CardForum from "../../components/CardForum.astro";
+import MonthStats from "../../components/MonthStats.astro";
+---
+
+<section
+  class="flex w-full p-3 flex-wrap justify-center items-center gap-12 mt-4"
+>
+  <CardForum
+    title="Conversación de la biodiversidad"
+    description="Foro para hablar sobre biodiversidad"
+    link="/foros/biodiversityForum"
+  />
+  <CardForum
+    title="Cambio Climatico"
+    description="Foro para hablar sobre cambio climatico"
+    link="/foros/climateChangeForum"
+  />
+  <CardForum
+    title="Reciclaje"
+    description="Foro para hablar sobre reciclaje"
+    link="/foros/recyclingForum"
+  />
+
+  <!-- MonthStats -->
+  <div
+    class="p-4 my-4 text-black flex justify-center flex-col items-center w-full"
+  >
+    <h2 class="lg:text-2xl font-medium m-3">Reciclaje del mes actual</h2>
+    <MonthStats />
+  </div>
+</section>

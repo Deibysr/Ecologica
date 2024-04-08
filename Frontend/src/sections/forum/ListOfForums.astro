@@ -1,0 +1,24 @@
+---
+import ItemForum from "../../components/ItemForum.astro";
+const forums = [
+  {
+    title: "Academia Universitaria",
+    description: "lorem ipsocwkdjadjadk",
+    msgs: 9,
+  },
+  {
+    title: "Lorem Titulo",
+    description: "lorem ipsocwkdjadjadk",
+    msgs: 2,
+  },
+  {
+    title: "Lorem Titulo 2",
+    description: "lorem ipsocwkdjadjadk",
+    msgs: 5,
+  },
+];
+---
+
+<section class="flex flex-col gap-3 mt-4 flex-[0.6]">
+  {forums.map((forum) => <ItemForum title={forum.title} description={forum.description} msgs={forum.msgs} />)}
+</section>

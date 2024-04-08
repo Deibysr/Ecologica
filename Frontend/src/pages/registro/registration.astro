@@ -1,0 +1,46 @@
+---
+// Import the necessary components
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout
+  title="Navegacion de educacion Universidad Cooperativa de Colombia sede Pasto"
+  description="Aqui podras navegar dentro del contenido de la educacion ambiental de la Universidad Cooperativa de Colombia"
+>
+  <section class="text-center mx-auto max-w-screen-md mt-8 mb-8">
+    <h1 class="text-4xl font-bold">Registro</h1>
+    <p class="text-lg text-gray-600 mt-4">
+      Aqui podras encontrar las estadisticas de la educacion ambiental de la Universidad Cooperativa de Colombia
+    </p>
+    <!-- Envoltura del formulario con color de fondo -->
+    <div class="bg-gray-100 p-8 rounded-lg shadow-md">
+      <form class="mt-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                  <label for="nombre" class="block text-lg font-medium text-gray-700 text-left">Nombre</label>
+                  <input type="text" id="nombre" name="nombre" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Ingresa tu nombre" required>
+              </div>
+              <div>
+                  <label for="apellido" class="block text-lg font-medium text-gray-700 text-left">Apellido</label>
+                  <input type="text" id="apellido" name="apellido" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Ingresa tu apellido" required>
+              </div>
+          </div>
+          <div class="mt-4">
+              <label for="email" class="block text-lg font-medium text-gray-700 text-left">Email</label>
+              <input type="email" id="email" name="email" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Ingresa tu email" required>
+          </div>
+          <div class="mt-4">
+              <label for="password" class="block text-lg font-medium text-gray-700 text-left">Contraseña</label>
+              <input type="password" id="password" name="password" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Crea una contraseña" required>
+          </div>
+          <div class="mt-4">
+              <label for="confirm-password" class="block text-lg font-medium text-gray-700 text-left">Confirmar Contraseña</label>
+              <input type="password" id="confirm-password" name="confirm-password" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Confirma tu contraseña" required>
+          </div>
+          <div class="mt-8">
+              <button type="submit" class="px-4 py-2 bg-green-500 text-white font-medium rounded-md">Registrarse</button>
+          </div>
+      </form>
+    </div>
+  </section>
+</Layout>

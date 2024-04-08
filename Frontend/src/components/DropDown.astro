@@ -1,0 +1,64 @@
+<script>
+  import { setOpenNavBar } from "../helpers/setOpenNavBar.ts";
+  const btnDropDown = document.querySelector(
+    'button[data-dropdown-toggle="dropdownNavbar"]'
+  );
+  const dropdownNavbar = document.querySelector("#dropdownNavbar");
+  document.addEventListener("DOMContentLoaded", () => {
+    if (!(dropdownNavbar && btnDropDown)) return;
+    setOpenNavBar(btnDropDown, dropdownNavbar);
+  });
+</script>
+
+<li class="relative">
+  <button
+    id="dropdownNavbarLink"
+    data-dropdown-toggle="dropdownNavbar"
+    class="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded md:border-0 md:p-0 md:w-auto dark:text-white dark:focus:text-white dark:border-gray-70 hover:bg-ecologica-secondary"
+    >Contenido <svg
+      class="w-2.5 h-2.5 ms-2.5"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 10 6"
+    >
+      <path
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="m1 1 4 4 4-4"></path>
+    </svg></button
+  >
+  <!-- Dropdown menu -->
+  <div
+    id="dropdownNavbar"
+    class="z-10 hidden pb-4 font-normal rounded-lg rounded-t-none shadow w-44 absolute top-[40px] bg-gray-700"
+  >
+    <ul
+      class="font-medium flex flex-col p-0 mt-4 justify-start rounded-lg text-left md:mt-0 md:border-0"
+    >
+      <li>
+        <a
+          href="/foros/principal"
+          class="block pt-1 md:pt-2 ps-4 text-gray-900 rounded hover:text-gray-300 md:border-0 md:ps-4 dark:text-white"
+          >Foros</a
+        >
+      </li>
+      <li>
+        <a
+          href="/estadisticas/principal"
+          class="block pt-2 ps-4 text-gray-900 rounded hover:text-gray-300 md:border-0 md:ps-4 dark:text-white"
+          >Estadisticas</a
+        >
+      </li>
+      <li>
+        <a
+          href="/educacion/principal"
+          class="block pt-2 ps-4 text-gray-900 rounded hover:text-gray-300 md:border-0 dark:text-white"
+          >Educación</a
+        >
+      </li>
+    </ul>
+  </div>
+</li>

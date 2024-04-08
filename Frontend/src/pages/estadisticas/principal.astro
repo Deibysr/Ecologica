@@ -1,0 +1,45 @@
+---
+// Import the necessary components
+import Layout from "../../layouts/Layout.astro";
+import {HeroSection} from "../../sections/stats/HeroSection.tsx";
+import StatsDona from "../../components/StatsDona";
+import YearStat from "../../sections/stats/YearStat.astro";
+import HistoryStat from "../../sections/stats/HistoryStat.astro";
+
+// Define your dynamic data for the StatsDona component
+// const currentMonthData = [25, 35, 45, 15]; // Replace with your actual dynamic data
+// const previousMonthData = [15, 25, 35, 45]; // Replace with your actual dynamic data
+---
+
+<Layout
+  title="Navegacion de educacion Universidad Cooperativa de Colombia sede Pasto"
+  description="Aqui podras navegar dentro del contenido de la educacion ambiental de la Universidad Cooperativa de Colombia"
+>
+  <main class="text-center mx-auto max-w-screen-md mt-8 mb-8">
+    <HeroSection client:only/>
+    <div
+      class="w-full p-4 my-4 text-black flex justify-between flex-row items-center"
+    >
+      <div>
+        <h2 class="lg:text-2xl font-medium pb-2 text-base mt-2">Mes actual</h2>
+        <StatsDona id="1" client:load data={[12, 45, 6, 7]} />
+      </div>
+      <div>
+        <h2 class="lg:text-2xl font-medium pb-2 text-base mt-12">
+          Anterior Mes
+        </h2>
+        <StatsDona id="2" client:load data={[3,5 ,6, 7]} />
+      </div>
+    </div>
+    <h2 class="lg:text-2xl font-medium pb-2 text-base mt-12">
+      Grafico de residuos reciclados en este 2024
+    </h2>
+    <YearStat />
+    <h2 class="lg:text-2xl font-medium pb-2 text-base mt-12">
+      Grafico historico de reciclaje
+    </h2>
+    <HistoryStat />
+    
+  </main>
+</Layout>
+../../components/StatsDona.tsx

@@ -1,0 +1,36 @@
+<script>
+  import Chart from "chart.js/auto";
+  const canvas = document.getElementById(
+    "canvasCircleMonty"
+  ) as HTMLCanvasElement;
+  const ctx = canvas.getContext("2d");
+  if (ctx) {
+    new Chart(ctx, {
+      type: "doughnut",
+      data: {
+        labels: ["Plastico", "Carton/papel", "Organico", "Pilas"],
+        datasets: [
+          {
+            label: "Cantidad de residuos",
+            data: [20, 30, 40, 50],
+            backgroundColor: ["#246876", "#9cc824", "#1c64ca", "#0c174b"],
+          },
+        ],
+      },
+      options: {
+        indexAxis: "y",
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: { display: false },
+            ticks: { display: false },
+          },
+        },
+      },
+    });
+  }
+</script>
+
+<div class="max-w-[600px] w-full">
+  <canvas id="canvasCircleMonty"> </canvas>
+</div>

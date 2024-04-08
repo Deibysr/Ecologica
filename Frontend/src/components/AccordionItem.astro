@@ -1,0 +1,30 @@
+---
+import Arrow from "../icons/Arrow.astro";
+interface Props {
+  title: string;
+  id: string;
+}
+const { title, id } = Astro.props;
+---
+
+<header id={`accordion-collapse-heading-${id}`}>
+  <button
+    type="button"
+    class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:border-gray-700 dark:text-black hover:bg-gray-100 dark:hover:bg-ecologica-secondary gap-3"
+    data-accordion-target={`#accordion-collapse-body-${id}`}
+    aria-expanded="true"
+    aria-controls={`#accordion-collapse-body-${id}`}
+  >
+    <h2>{title}</h2>
+    <Arrow />
+  </button>
+</header>
+<div
+  id={`accordion-collapse-body-${id}`}
+  class="hidden"
+  aria-labelledby={`accordion-collapse-heading-${id}`}
+>
+  <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700">
+    <slot />
+  </div>
+</div>

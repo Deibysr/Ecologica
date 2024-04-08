@@ -1,0 +1,238 @@
+---
+import AccordionItem from "../../components/AccordionItem.astro";
+---
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const accordionButtons = document.querySelectorAll(
+      "[data-accordion-target]"
+    );
+
+    accordionButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const targetId = button.getAttribute("data-accordion-target");
+
+        const targetElement = document.querySelector(targetId as string);
+
+        if (targetElement) {
+          targetElement.classList.toggle("hidden");
+        }
+
+        const iconElement = button.querySelector("[data-accordion-icon]");
+
+        if (iconElement) {
+          iconElement.classList.toggle("rotate-180");
+        }
+      });
+    });
+  });
+</script>
+<!-- Aqui inicia el acordeon -->
+<section id="accordion-collapse" data-accordion="collapse">
+  <AccordionItem title="Medio Ambiente" id="1">
+    <p class="mb-2 text-black">
+      <a
+        href="/educacion/medioAmbiente"
+        class="text-blue-600 dark:text-blue-500 hover:underline"
+        >El medio ambiente</a
+      > engloba todos los aspectos y elementos naturales y artificiales que rodean
+      a los seres vivos, afectando su vida de diversas maneras. La responsabilidad
+      social y ambiental de las instituciones educativas, especialmente las universidades,
+      es fundamental para el desarrollo sostenible y el bienestar de la sociedad.
+      Esto incluye la promoción del desarrollo humano sostenible, la investigación
+      científica y tecnológica orientada a la sostenibilidad, y la formación de una
+      conciencia sobre la importancia de proteger y mejorar el entorno natural.
+      <a
+        href="https://www.redalyc.org/journal/5709/570962992017/html/"
+        class="text-blue-600 dark:text-blue-500 hover:underline">(Redalyc)</a
+      >
+    </p>
+    <p class="text-black">
+      Las universidades tienen el deber de liderar con el ejemplo, promoviendo
+      valores, cultura, y prácticas que respeten y protejan el medio ambiente.
+      La educación ambiental en el nivel superior debe entonces reflejar estos
+      compromisos, incorporando la sostenibilidad en su currículo y actividades
+      cotidianas para formar profesionales con conciencia y responsabilidad
+      ambiental. <a
+        href="https://www.redalyc.org/journal/440/44057415025/html/"
+        class="text-blue-600 dark:text-blue-500 hover:underline">(Redalyc)</a
+      >
+    </p>
+  </AccordionItem><section id="accordion-collapse" data-accordion="collapse">
+    <AccordionItem title="Practicas Sostenibles" id="2">
+      <p class="mb-2 text-black">
+        <a
+          href="/educacion/practicasSostenibles"
+          class="text-blue-600 dark:text-blue-500 hover:underline"
+          >Las prácticas sostenibles</a
+        > se centran en adoptar acciones que permitan un equilibrio entre el desarrollo
+        económico, el bienestar social y la protección del medio ambiente. En el
+        contexto universitario, esto implica la integración de políticas y acciones
+        que promuevan un uso eficiente de los recursos, la enseñanza orientada hacia
+        la sostenibilidad y la concienciación sobre el cuidado ambiental.
+        <a
+          href="https://www.redalyc.org/journal/5606/560659011001/html/"
+          class="text-blue-600 dark:text-blue-500 hover:underline">(Redalyc)</a
+        >
+      </p>
+      <p class="text-black">
+        La educación para el desarrollo sostenible se ha establecido como una
+        herramienta esencial para fomentar una transformación social hacia
+        prácticas más sostenibles y respetuosas con el entorno. Implica la
+        incorporación de estos conceptos de manera transversal en el currículo,
+        promoviendo un aprendizaje basado en la experiencia y la colaboración
+        con la comunidad. <a
+          href="https://www.universitatcarlemany.com/actualidad/blog/sostenibilidad-universitaria/"
+          class="text-blue-600 dark:text-blue-500 hover:underline">(UCMA)</a
+        >
+      </p>
+
+      Las instituciones educativas desempeñan un papel fundamental en este
+      proceso, preparando a los estudiantes para enfrentar y resolver los
+      desafíos ambientales actuales y futuros mediante la adquisición de
+      conocimientos, el desarrollo de habilidades y la promoción de valores
+      orientados hacia la sostenibilidad. <a
+        href="https://ecologiadigital.bio/cuales-son-las-mejores-practicas-de-educacion-para-el-desarrollo-sostenible-y-el-cuidado-del-medio-ambiente/"
+        class="text-blue-600 dark:text-blue-500 hover:underline"
+        >(Ecología Digital)</a
+      >
+    </AccordionItem>
+  </section>
+  <AccordionItem title="Jardinería y Conexión con la Naturaleza" id="3">
+    <p class="mb-2 text-black">
+      <a
+        href="/educacion/jardineriaConexion"
+        class="text-blue-600 dark:text-blue-500 hover:underline"
+        >Las prácticas sosteniblesLa jardinería y la conexión con la naturaleza</a
+      >
+      son aspectos cruciales en la educación para el desarrollo sostenible, destacando
+      la importancia de la educación al aire libre. En este contexto, la naturaleza
+      actúa como un escenario ideal para desarrollar conocimientos, habilidades como
+      el trabajo en equipo, el liderazgo centrado en la Tierra, y el pensamiento
+      crítico y sistémico. Al interactuar con la naturaleza, se fortalecen valores
+      y se promueve una comprensión más profunda de las interconexiones entre sistemas
+      naturales y sociales, así como de los impactos socioculturales en los problemas
+      ambientales <a
+        href="https://laderasur.com/articulo/educacion-en-la-naturaleza-la-clave-para-lograr-un-desarrollo-sustentable/"
+        class="text-blue-600 dark:text-blue-500 hover:underline">(Ladera Sur)</a
+      >. La educación inclusiva también se beneficia enormemente de la conexión
+      con la naturaleza, demostrando mejoras significativas en el bienestar y el
+      aprendizaje de estudiantes con necesidades educativas especiales <a
+        href="https://laderasur.com/articulo/educacion-en-la-naturaleza-la-clave-para-lograr-un-desarrollo-sustentable/"
+        class="text-blue-600 dark:text-blue-500 hover:underline"
+        >(Naturaliza Educación)</a
+      >.
+    </p>
+  </AccordionItem>
+  <AccordionItem title="Proyectos de Bricolaje y Reutilización" id="4">
+    <p class="mb-2 text-black">
+      <a
+        href="/educacion/bricolageReutilizacion"
+        class="text-blue-600 dark:text-blue-500 hover:underline"
+        >Los proyectos de bricolaje y reutilización</a
+      > emergen como estrategias fundamentales para promover la sostenibilidad y
+      reducir la generación de residuos. Estos proyectos van desde la creación de
+      centros de reutilización, donde los objetos y materiales pueden tener una segunda
+      vida, hasta programas de intercambio o trueque y campañas de sensibilización
+      en escuelas, empresas y comunidades. La implementación de estos proyectos en
+      la educación universitaria no solo contribuye a la conservación del medio ambiente,
+      sino que también fomenta la economía circular, la colaboración y el consumo
+      responsable.
+      <a
+        href="https://reciclaria.com/reutilizacion/proyectos-reutilizacion-reciclaje-beneficios-soluciones/"
+        class="text-blue-600 dark:text-blue-500 hover:underline">(RECICLARIA)</a
+      >.
+    </p>
+  </AccordionItem>
+  <AccordionItem title="Uso Responsable de los Recursos" id="5">
+    <p class="mb-2 text-black">
+      El uso responsable de los recursos en el contexto educativo universitario
+      se enfoca en la adopción de prácticas sostenibles y la incorporación de la
+      tecnología para optimizar el aprendizaje y la gestión de recursos. Esto
+      implica no solo la utilización eficiente de los materiales y la energía
+      sino también la integración de tecnologías digitales para ampliar el
+      acceso a la educación, mejorar su calidad y fomentar un entorno de
+      aprendizaje inclusivo y accesible. La formación en el uso consciente de
+      los recursos abarca desde la infraestructura tecnológica hasta las
+      estrategias pedagógicas que promueven el reciclaje, la reutilización y la
+      reducción del desperdicio, contribuyendo así a la conservación del medio
+      ambiente y al desarrollo sostenible.
+      <a
+        href="https://unesdoc.unesco.org/ark:/48223/pf0000133009#:~:text=URL%3A%20https%3A%2F%2Funesdoc.unesco.org%2Fark%3A%2F48223%2Fpf0000133009%0AVisible%3A%200%25%20"
+        class="text-blue-600 dark:text-blue-500 hover:underline"
+        >(UNESCO Document Repository)</a
+      ><a
+        href="https://www.redalyc.org/journal/3314/331462375011/html/"
+        class="text-blue-600 dark:text-blue-500 hover:underline">(Redalyc)</a
+      >.
+    </p>
+    <p class="text-black"></p>
+  </AccordionItem>
+  <AccordionItem title="Ejemplo Personal" id="6">
+    <p class="mb-2 text-black">
+      El <a
+        href="/educacion/ejemploPersonal"
+        class="text-blue-600 dark:text-blue-500 hover:underline"
+        >Ejemplo Personal</a
+      > en el contexto de la sostenibilidad y la ecología en la educación universitaria
+      se refiere a la influencia directa y el impacto que individuos dentro de la
+      comunidad universitaria pueden tener en promover prácticas sostenibles y ecológicas.
+      Este enfoque implica no solo la adopción de comportamientos respetuosos con
+      el medio ambiente por parte de estudiantes, docentes y personal administrativo,
+      sino también la integración de estos principios en la docencia, la investigación
+      y la gestión universitaria.
+    </p>
+  </AccordionItem>
+  <AccordionItem title="Cursos y Programas Académicos" id="7">
+    <p class="mb-2 text-black">
+      Pendiente me toca averiguar más información sobre este tema, en la
+      universidad cooperativa de colombia. En cada uno de los departamentos de
+      carreras.
+    </p>
+  </AccordionItem>
+  <AccordionItem title="Seminarios y Talleres" id="8">
+    <p class="mb-2 text-black">
+      Pendiente me toca averiguar más información sobre este tema, en la
+      universidad cooperativa de colombia. En cada uno de los departamentos de
+      carreras.
+    </p>
+  </AccordionItem>
+  <AccordionItem title="Iniciativas de Campus Verde" id="9">
+    <p class="mb-2 text-black">
+      Pendiente me toca averiguar más información sobre este tema, en la
+      universidad cooperativa de colombia. En cada uno de los departamentos de
+      carreras.
+    </p>
+  </AccordionItem>
+  <AccordionItem title="Proyectos de Investigación y Desarrollo" id="10">
+    <p class="mb-2 text-black">
+      <a
+        href="/educacion/investigacionDesarrollo"
+        class="text-blue-600 dark:text-blue-500 hover:underline"
+        >Los proyectos de investigación y desarrollo (I+D)</a
+      > en el ámbito universitario, especialmente enfocados en medio ambiente y ecología,
+      son fundamentales para generar nuevo conocimiento, soluciones innovadoras y
+      tecnologías sostenibles que aborden los desafíos ambientales actuales. Estos
+      proyectos suelen ser interdisciplinarios, combinando áreas como la biología,
+      ecología, ingeniería ambiental, ciencias sociales, y más, para ofrecer enfoques
+      integrales en la gestión y conservación de recursos naturales, el estudio de
+      impactos ambientales, la mitigación del cambio climático, y la promoción de
+      prácticas sostenibles.
+    </p>
+  </AccordionItem>
+  <AccordionItem title="Sostenibilidad en el Campus" id="11">
+    <p class="mb-2 text-black">
+      Pendiente me toca averiguar más información sobre este tema, en la
+      universidad cooperativa de colombia. En cada uno de los departamentos de
+      carreras.
+    </p>
+  </AccordionItem>
+  <AccordionItem title="Actividades Extracurriculares y Voluntariado" id="12">
+    <p class="mb-2 text-black">
+      Pendiente me toca averiguar más información sobre este tema, en la
+      universidad cooperativa de colombia. En cada uno de los departamentos de
+      carreras.
+    </p>
+  </AccordionItem>
+  <!-- Aqui finaliza el acordeon -->
+</section>
