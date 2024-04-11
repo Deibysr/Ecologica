@@ -1,25 +1,12 @@
-import { db } from "../DB/config/config.js"
+import Sequelize from 'sequelize';
+import connectDB from '../DB/config/config.js';
 
-/**
- * @typedef {Object} userData
- * @property {string} Name
- * @property {string} Email
- * @property {number} Age
- * @property {boolean} IsAdmin
- * @property {string} Password
- */
-export const userData = {
-    Name: "",
-    Email: "",
-    Age: "",
-    IsAdmin: false,
-    Password: ""
-}
+const db = await connectDB()
 
-export const User = {
-    create: (userData) => db("User").insert(userData),
-    find: (id) => db("User").where({id}).first(),
-    findAll: () => db("User").select(),
-    update: (userData, id) => db("User").where({id}).update(userData),
-    delete: (id) => db("User").where({ id }).del(),
-}
+export const User = db.define('User',{
+    name: {type: Sequelize.STRING},
+    email: {type: Sequelize.STRING, unique: true},
+    age: {type: Sequelize.INTEGER},
+    isAdmin: {type: Sequelize.INTEGER},
+    password: {type: Sequelize.STRING}
+}, {timestamps: false})

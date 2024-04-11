@@ -1,27 +1,18 @@
-import knex from "knex"
+import Sequelize from 'sequelize';
 
-
-function createUserTable(knex) {
-    return knex.schema.createTable('Deiby', function (table) {
-        table.increments('id').primary();
-        table.string('Name');
-        table.string('Email').unique();
-        table.integer('Age');
-        table.boolean('IsAdmin');
-        table.string('Password');
-        // Agrega cualquier otra columna necesaria
-    });
+let db = null;
+export default async function connectDB(){
+    if (!db){
+        try {
+            db = new Sequelize({
+                dialect: 'sqlite',
+                storage: './DB/Ecologica.db'
+            })
+            await db.authenticate();
+            console.log('La base de datos esta conectada');            
+        } catch (error) {
+            console.error('Error no se pudo conectar la base de datos', error);
+        }
+    }
+    return db;
 };
-
-
-
-export const db = knex(
-    {
-        client: 'sqlite3',
-        useNullAsDefault: true,
-        connection: {
-            filename: "../packsage-lockf.db",
-        },
-    });
-
-// createUserTable(db)
