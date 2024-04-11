@@ -1,5 +1,8 @@
 import { User } from "../../models/User.js";
 import comparePassword from "../../utils/comparePassword.js";
+import jwt from 'jsonwebtoken'; // !New Importar jsonwebtoken
+
+const JWT_SECRET = process.env.JWT_SECRET || 'tu_clave_secreta'; // ! New: Definir una clave secreta para el JWT
 
 export async function loginUser(req, res){
     try {
@@ -17,8 +20,12 @@ export async function loginUser(req, res){
         }
         const userResult = user.toJSON();
         delete userResult.password;
+
+        // !New: Generar el token JWT
+        const token = jwt.sign({ id: userResult.id }, JWT_SECRET, { expiresIn: '1h' });
+
         console.log(`user: ${userResult.name} ha sido logeado correctamente`);
-        res.json(userResult);
+        res.json({ user: userResult, token }); // ! New
     } catch (error) {
         
     }
