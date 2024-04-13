@@ -8,6 +8,5 @@ export const Education = db.define('Education', {
     title: { type: Sequelize.STRING },
     description: { type: Sequelize.STRING },
     pageId: { type: Sequelize.STRING },
-    id: { type: Sequelize.STRING },
     userId: { type: Sequelize.NUMBER }
 }, { timestamps: false })

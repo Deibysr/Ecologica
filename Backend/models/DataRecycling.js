@@ -8,5 +8,4 @@ export const DataRecycling = db.define('DataRecycling', {
     quantity: { type: Sequelize.NUMBER },
     timeStamp: { type: Sequelize.STRING },
     userId: { type: Sequelize.STRING },
-    id: { type: Sequelize.STRING },
 }, { timestamps: false })

@@ -5,7 +5,6 @@ const db = await connectDB()
 
 export const PageEducation = db.define('PageEducation', {
     sectionId: { type: Sequelize.STRING },
-    id: { type: Sequelize.NUMBER },
     title: { type: Sequelize.STRING },
     content: { type: Sequelize.STRING },
     timeStamp: { type: Sequelize.STRING },
