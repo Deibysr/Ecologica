@@ -1,4 +1,4 @@
-import { Forum } from "../../models/forum.js"
+import { Forum } from "../../models/Forum.js"
 
 export default async function createForum(req, res){
     console.log(req.user)
