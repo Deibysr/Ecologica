@@ -1,3 +1,8 @@
+export interface CreateMessageRequest {
+    forumId: number;
+    content: string;
+}
+
 export interface Message {
     userID: string,
     userName: string,
