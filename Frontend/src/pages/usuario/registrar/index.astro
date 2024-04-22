@@ -1,0 +1,13 @@
+---
+import FormRegister from "@/components/User/FormRegister.astro";
+import RegisterLayout from "@/layouts/RegisterLayout.astro";
+---
+
+<script>
+  import registerScript from "@/util/registerScript";
+  registerScript();
+</script>
+
+<RegisterLayout>
+  <FormRegister/>
+</RegisterLayout>

@@ -1,0 +1,103 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<script>
+  import userLogin from "../../server/User/login";
+  import saveSession from "../../server/User/saveSession";
+  import createPopup from "../../util/createPopup";
+
+  const formData = {
+    email:"",
+    password: ""
+  }
+
+  function handleChange(e:Event){
+    const input = e.target;
+    if(!(input && input instanceof HTMLInputElement)) return;
+    const {name, value} = input;
+    formData[name as keyof {email:string, password:string}] = value;
+  };
+
+  async function handleSubmit(event: Event) {
+    event.preventDefault();
+    const section = document.querySelector("section");
+    if (!event.target || !section) return; 
+   
+    const {email, password} = {...formData};
+
+    const {user, token, error} = await userLogin(email, password);
+    if(error){
+      createPopup({
+        container: section,
+        icon: `<svg viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>error-filled</title> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="add" fill="#ff0000" transform="translate(42.666667, 42.666667)"> <path d="M213.333333,3.55271368e-14 C331.136,3.55271368e-14 426.666667,95.5306667 426.666667,213.333333 C426.666667,331.136 331.136,426.666667 213.333333,426.666667 C95.5306667,426.666667 3.55271368e-14,331.136 3.55271368e-14,213.333333 C3.55271368e-14,95.5306667 95.5306667,3.55271368e-14 213.333333,3.55271368e-14 Z M262.250667,134.250667 L213.333333,183.168 L164.416,134.250667 L134.250667,164.416 L183.168,213.333333 L134.250667,262.250667 L164.416,292.416 L213.333333,243.498667 L262.250667,292.416 L292.416,262.250667 L243.498667,213.333333 L292.416,164.416 L262.250667,134.250667 Z" id="Combined-Shape"> </path> </g> </g> </g></svg>`,
+        msg: error,
+        status: 'error'
+      })
+      return;
+    }
+    saveSession({user, token});
+    window.location.href = "/";
+  }
+  
+  const form = document.getElementById("login");
+  const allInputs = document.querySelectorAll("input");
+  allInputs.forEach(input=> input.addEventListener("change", handleChange))
+  form?.addEventListener("submit", handleSubmit);
+</script>
+
+<Layout
+  title="Navegacion de educacion Universidad Cooperativa de Colombia sede Pasto"
+  description="Aqui podras navegar dentro del contenido de la educacion ambiental de la Universidad Cooperativa de Colombia"
+>
+    <section class="text-left mx-auto max-w-screen-md h-screen mt-20 mb-8">
+      <h1 class="text-4xl font-bold">Iniciar sesion</h1>
+      <p class="text-lg text-gray-600 mt-4">
+        ¡Inica sesión ahora para poder participar activamente en los foros de Ecologica!
+      </p>
+      <div class="bg-gray-100 p-8 rounded-lg shadow-md mt-6">
+        <form id="login">
+          <div class="mb-4">
+            <label for="email" class="block text-gray-700 text-sm font-bold mb-2"
+              >Email:</label
+            >
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              placeholder="Ingresa tu email"
+              required
+            />
+          </div>
+          <div class="mb-6">
+            <label
+              for="password"
+              class="block text-gray-700 text-sm font-bold mb-2">Password:</label
+            >
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              placeholder="Ingresa tu contraseña"
+              required
+            />
+          </div>
+          <div class="flex items-center justify-between">
+            <button
+              type="submit"
+              class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >Iniciar sesión</button
+            >
+            <a
+              href="/forgot-password"
+              class="inline-block align-baseline font-bold text-sm text-emerald-700 hover:text-blue-800"
+              >¿Olvidaste tu contraseña?</a
+            >
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>
+</Layout>

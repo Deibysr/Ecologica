@@ -1,27 +1,34 @@
-
-import MessageComponent from "../../components/MessageComponent"
+import MessageComponent from "../../components/Forums/MessageComponent"
 import { Send } from "../../icons/Send"
 import type { DisplayMessage } from "../../interfaces/Message"
 
 interface Props {
-    title: string
-    msgs: DisplayMessage[]
+    forumId:number
 }
 
-export default function ForumChat({title, msgs}: Props){
+const forums = [
+    {id: 1, title: "Academia Universitaria", description: "Foro sobre blah blah", messages: []}
+];
+
+export default function ForumChat({forumId}: Props){
+    const currentForum = forums.find(forum=> forum.id === forumId);
+
     return (
-        <section className="flex-1 p-3 min-h-[80vh] ">
-            <h3 className="font-bold m-2 pb-6 border-b border-b-gray-300">{title}</h3>
-            <div className="flex flex-col justify-between h-[90%]">    
-                <div className="flex flex-col gap-4">
-                    {msgs.map((msg) => (
+        <section className="flex-1 mt-6 min-h-[80vh] ">
+            <div className="border-b border-b-gray-300 pb-3">
+                <h3 className="font-bold">{currentForum?.title}</h3>
+                <p className="text-sm text-gray-700 mt-1">{currentForum?.description}</p>
+            </div>
+            <div className="flex flex-col justify-between h-[600px] lg:h-[90%]">    
+                <div className="flex flex-col gap-6">
+                    {/* {msgs.map((msg) => (
                         <MessageComponent
                             key={msg.id}
                             content={msg.content}
                             userName={msg.userName}
                             self={msg.self}
                         />
-                    ))}
+                    ))} */}
                 </div>
                 <div>
                     <label className="w-full flex gap-2 bg-white px-2  items-center">

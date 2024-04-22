@@ -1,17 +1,20 @@
 ---
-import ItemForum from "../../components/ItemForum.astro";
+import ItemForum from "../../components/Forums/ItemForum.astro";
 const forums = [
   {
+    id: 1,
     title: "Academia Universitaria",
     description: "lorem ipsocwkdjadjadk",
     msgs: 9,
   },
   {
+    id: 2,
     title: "Lorem Titulo",
     description: "lorem ipsocwkdjadjadk",
     msgs: 2,
   },
   {
+    id: 3,
     title: "Lorem Titulo 2",
     description: "lorem ipsocwkdjadjadk",
     msgs: 5,
@@ -19,6 +22,6 @@ const forums = [
 ];
 ---
 
-<section class="flex flex-col gap-3 mt-4 flex-[0.6]">
-  {forums.map((forum) => <ItemForum title={forum.title} description={forum.description} msgs={forum.msgs} />)}
+<section class="pb-3 lg:pb-0 flex flex-row overflow-x-scroll lg:overflow-x-hidden lg:flex-col gap-3 mt-10 flex-[0.6]">
+  {forums.map((forum) => <ItemForum title={forum.title} description={forum.description} msgs={forum.msgs} id={forum.id} />)}
 </section>

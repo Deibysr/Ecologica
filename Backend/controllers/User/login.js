@@ -22,8 +22,7 @@ export async function loginUser(req, res){
         const userResult = user.toJSON();
         delete userResult.password;
 
-        // !New: Generar el token JWT
-        const token = jwt.sign({ userResult }, JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ userResult }, JWT_SECRET, { expiresIn: '24h' });
 
         console.log(`user: ${userResult.name} ha sido logeado correctamente`);
         res.json({ user: userResult, token }); // ! New
