@@ -15,3 +15,6 @@ También se ha implementado la verificación del rol del usuario. Esto permite a
 
 - Ruta Privada para Registrar Administradoress
 Actualmente, estamos trabajando en la implementación de una ruta privada para registrar administradores. Esta característica permitirá a los usuarios con privilegios adecuados registrar nuevos administradores en el sistema.
+
+//Recuerda crear el archivo .env con el valor del token JWT_KEY en el backend para su correcto funcionamiento, ya que este archivo no debe ser subido en el repositorio. 
+Lo mismo para el .env del front-end con su PUBLIC_URL_PATH donde iría el local host
