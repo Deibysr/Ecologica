@@ -1,0 +1,12 @@
+---
+import FormRegister from "@/components/User/FormRegister.astro";
+import RegisterLayout from "@/layouts/RegisterLayout.astro";
+export const prerender = false;
+
+const {token} = Astro.params;
+---
+
+
+<RegisterLayout>
+  <FormRegister token={token}/>
+</RegisterLayout>

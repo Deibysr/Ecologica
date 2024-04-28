@@ -1,6 +1,6 @@
 import { useState } from "react";
-import PrincipalButton from "../../components/PrincipalButton.tsx";
-import { StadisticModal } from "../../components/StadisticModal.tsx";
+import PrincipalButton from "../../components/UI/PrincipalButton.tsx";
+import { StadisticModal } from "../../components/Stats/StadisticModal.tsx";
 
 
 

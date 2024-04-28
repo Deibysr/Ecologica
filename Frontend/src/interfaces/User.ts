@@ -2,16 +2,18 @@ export interface User {
     name: string;
     email: string;
     age: number;
-    isAdmin: boolean;
+    isAdmin: number;
     password: string;
+    id: string
 }
 
-export interface PrevUserToSend {
+export interface FormRegisterDataUser {
     name: string;
-    confirmPassword?: string;
     lastName?: string;
     email: string;
     age: number;
-    isAdmin: boolean;
     password: string;
-}
+    confirmPassword?: string;
+    isAdmin:number;
+    [key:string]: string | number | undefined
+  }

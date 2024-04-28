@@ -1,8 +1,4 @@
-// Importa la interfaz User desde donde la tengas definida
-import type { User } from "../../interfaces/User";
-
-
-const URL = import.meta.env.URL_PATH; // Asegúrate de tener la URL base definida en las variables de entorno
+const URL = import.meta.env.PUBLIC_URL_PATH; 
 
 export default async function userLogin(email: string, password: string) {
     const options = {
@@ -15,16 +11,12 @@ export default async function userLogin(email: string, password: string) {
 
     try {
         const result = await fetch(`${URL}/user/login`, options);
-        const data = await result.json();
-        
-        if (!result.ok) {
-            throw new Error(data.message || "Error al iniciar sesión");
-        }
-        
-        console.log(`Usuario ${data.user.name} ha iniciado sesión correctamente`);
-        return data; // Retorna el objeto con la información del usuario y el token
-    } catch (error) {
+        const user = await result.json();
+        if(user.error) console.error(user.error);
+        console.log(`Usuario ${user.name} ha iniciado sesión correctamente`);
+        return user; 
+    } catch (error:any) {
         console.error("Error en login:", error);
-        throw error; // Propaga el error para manejarlo en otro lado si es necesario
+        return {error: error.message}
     }
 }
