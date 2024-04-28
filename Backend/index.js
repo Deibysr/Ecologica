@@ -6,13 +6,13 @@ import cors from "cors";
 import { dbSync } from "./DB/config/dbSync.js";
 import dataRecyclingRouter from "./router/dataRecyclingRouter.js";
 
-const port = 3001
+const port = 3001;
 
-await connectDB()
+await connectDB();
 
-await dbSync()
+await dbSync();
 
-const app = express()
+const app = express();
 app.use(cors({
     origin: 'http://localhost:4321'
 }))
@@ -20,10 +20,9 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/user", userRouter)
-
-app.use("/forum", forumRouter)
-app.use("/stats", dataRecyclingRouter)
+app.use("/user", userRouter);
+app.use("/forum", forumRouter);
+app.use("/stats", dataRecyclingRouter);
 
 
 

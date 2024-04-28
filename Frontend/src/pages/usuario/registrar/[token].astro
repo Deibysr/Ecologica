@@ -6,11 +6,7 @@ export const prerender = false;
 const {token} = Astro.params;
 ---
 
-<script>
-  import registerScript from "@/util/registerScript";
-  registerScript();
-</script>
 
 <RegisterLayout>
-  <FormRegister/>
+  <FormRegister token={token}/>
 </RegisterLayout>

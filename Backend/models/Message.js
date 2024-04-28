@@ -13,19 +13,20 @@ export const Message = db.define('Message', {
             key: "id",
         }
     },
-    content: {
-        type: Sequelize.TEXT
-    },
+    content: {type: Sequelize.TEXT},
     forumId: {
         type: Sequelize.INTEGER,
         references: {
             model: Forum,
             key: "id",
+            onDelete: `CASCADE`
         }
     },
     timeStamp: {
         type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW // Esto establece automáticamente la fecha y hora actual
+        defaultValue: Sequelize.NOW 
     }
 }, { timestamps: false });
+
+Message.belongsTo(User, { foreignKey: 'userId' });
 

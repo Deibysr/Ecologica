@@ -1,4 +1,13 @@
-<form class="mt-8" id="register">
+---
+const {token} = Astro.props;
+---
+<script>
+  import registerScript from "@/util/registerScript";
+  const token = document.getElementById("register")?.getAttribute("data-set-token");
+  registerScript(token);
+</script>
+
+<form class="mt-8" id="register" data-set-token={token}>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div>
         <label

@@ -1,0 +1,50 @@
+---
+import getAllForums from "@/server/Forum/getAllForums";
+import Layout from "../../layouts/Layout.astro";
+import ForumChat from "../../sections/forum/ForumChat.tsx";
+import ListOfForums from "../../sections/forum/ListOfForums.tsx";
+import type { Forum } from "@/interfaces/Forum";
+
+export const prerender = false;
+const { forumName } = Astro.params;
+const forums = await getAllForums();
+const currentForum = forums.find((forum:Forum) => forum.title === forumName);
+---
+
+<Layout
+    title="Ecologica Universidad Cooperativa de Colombia"
+    description="Pagina principal de medicion ecologica de la Universidad Cooperativa de Colombia"
+>
+    <main class="p-12 bg-gray-100">
+        <div class="text-left">
+            <h1 class="text-2xl font-bold lg:text-4xl">
+                Foros de <span
+                    class="bg-gradient-to-r from-ecologica-primary to-ecologica-secondary text-transparent bg-clip-text"
+                    >ecologia</span
+                >
+            </h1>
+            <p class="mt-5 text-sm lg:text-lg text-gray-700 max-w-[500px]">
+                Aquí trataremos todos los temas más importantes que influyen en
+                el <span
+                    class="bg-gradient-to-r from-ecologica-primary to-ecologica-secondary text-transparent bg-clip-text font-bold"
+                    >reciclaje</span
+                > de nuestra Universidad.
+            </p>
+        </div>
+        <div class="flex flex-col lg:flex-row gap-6">
+            {
+                !currentForum ?
+                <ListOfForums forums={forums} client:load/>
+                <section class="flex-1 mt-6 min-h-[80vh] flex flex-col items-center gap-8 border-l-2">
+                    <h2 class="text-2xl font-bold ">Bienvenido a la sección de foros</h2>
+                    <h3 class="text-lg font-normal">Por favor, elige algún foro de la izquierda...</h3>
+                    <img width="300" src="https://www.troublefreepool.com/media/mr-bean-waiting-gif.190931/full" alt="Gif de mr bean esperando">
+                </section>
+                :
+                <ListOfForums forums={forums} client:load/>
+                <ForumChat currentForum={currentForum} client:load/>
+            }
+            
+        </div>
+    </main>
+</Layout>

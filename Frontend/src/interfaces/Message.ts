@@ -1,16 +1,13 @@
-export interface CreateMessageRequest {
-    forumId: number;
-    content: string;
-}
+import type { User } from "./User"
 
 export interface Message {
-    userID: string,
-    userName: string,
+    User: User,
+    userId: string,
     id: string,
     content: string,
     timeStamp: Date,
-    foroId: string,
-    self: boolean
+    forumId: string,
+    self:boolean
 }
 
 export interface DisplayMessage {

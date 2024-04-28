@@ -2,8 +2,9 @@ export interface User {
     name: string;
     email: string;
     age: number;
-    isAdmin: boolean;
+    isAdmin: number;
     password: string;
+    id: string
 }
 
 export interface FormRegisterDataUser {
@@ -13,6 +14,6 @@ export interface FormRegisterDataUser {
     age: number;
     password: string;
     confirmPassword?: string;
-    isAdmin:boolean;
-    [key:string]: string | number | boolean | undefined
+    isAdmin:number;
+    [key:string]: string | number | undefined
   }

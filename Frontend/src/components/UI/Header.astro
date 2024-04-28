@@ -1,5 +1,6 @@
 ---
 import DropDown from "./DropDown.astro";
+import Loader from "./Loader.astro";
 ---
 
 <script>
@@ -20,9 +21,6 @@ import DropDown from "./DropDown.astro";
     setOpenNavBar(btn, navbar);
     closeBtn?.addEventListener("click", closeSession);
   });
-
-  
-
 </script>
 
 <nav class="border-gray-200 bg-ecologica-primary relative">
@@ -66,32 +64,33 @@ import DropDown from "./DropDown.astro";
         <li>
           <a
             href="/"
-            class="block hover:bg-ecologica-secondary py-2 px-3 text-white rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
+            class="block hover:opacity-80 py-2 px-3 text-white rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
             aria-current="page">Inicio</a>
         </li>
         <DropDown/> 
-        <div class="gap-5 hidden" data-auth-user>
+        <li>
+          <a
+            href="/foros/principal"
+            class="block hover:opacity-80 py-2 px-3 text-gray-900 rounded md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:text-white md:dark:hover:bg-transparent"
+            >Foros</a>
+        </li>
+        <div class="gap-0 hidden flex-col lg:flex-row items-center lg:gap-6" data-auth-user>
           <li>
             <a
               href="/usuario/registrar"
-              class="block hover:bg-ecologica-secondary py-2 px-3 text-gray-900 rounded md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:text-white md:dark:hover:bg-transparent"
+              class="block hover:opacity-80 py-2 px-3 text-gray-900 rounded md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:text-white md:dark:hover:bg-transparent"
               >Registrarse</a>
           </li>
           <li>
             <a
               href="/usuario/login"
-              class="block hover:bg-ecologica-secondary py-2 px-3 text-gray-900 rounded md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:text-white md:dark:hover:bg-transparent"
+              class="block hover:opacity-80 py-2 px-3 text-gray-900 rounded md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:text-white md:dark:hover:bg-transparent"
               >Iniciar Sesion</a>
           </li>
         </div>
-        <div class="gap-5 hidden items-center" data-logged-user>
-          <li>
-            <a
-              href="/foros/principal"
-              class="block hover:bg-ecologica-secondary py-2 px-3 text-gray-900 rounded md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:text-white md:dark:hover:bg-transparent"
-              >Foros</a>
-          </li>
-          <li>
+        <div class="flex items-center flex-col lg:flex-row lg:gap-6" >
+         
+          <li class="hidden" data-logged-user>
             <button
               data-close-session
               class="block rounded-lg text-white bg-ecologica-secondary py-2 px-3 bg-opacity-90 hover:bg-opacity-100"
@@ -99,6 +98,7 @@ import DropDown from "./DropDown.astro";
             </button>
           </li>
         </div>
+        <Loader/>
       </ul>
     </div>
   </div>

@@ -2,19 +2,23 @@
 
 ## Características Añadidas:
 
-1. Autenticación del Usuario
-En esta feature, se ha implementado la autenticación del usuario. Esto permite a los usuarios verificar su identidad y acceder a su cuenta.
+1. Creación de Administrador con página privada.
+    Para crear a un administrador ser deberá entrar a una ruta privada, esta es:
+    http://localhost:4321/usuario/registrar/Y aqui el token PUBLIC_CREATE_ADMIN del .env
+    Esta ruta se ve exactamente igual que la del register normal, pero al registrarse crea administradores. 
 
-2. Inicio de Sesión
-Se ha añadido la funcionalidad de inicio de sesión tanto en el registro (`register`) como en el inicio de sesión (`login`). Esto permite a los usuarios crear una nueva cuenta o iniciar sesión en una existente.
+2. Rol de usarios.
+    Se ha implementado correctamente el rol de administrador, en la sección de foro solo los admins pueden crear y borrar foros nuevos.
 
-3. Verificación del Rol del Usuario
-También se ha implementado la verificación del rol del usuario. Esto permite al sistema identificar el rol de un usuario y proporcionarle acceso a las funciones correspondientes tanto si es usuario como admin.
+3. Funcionalidad de mensajes
+   Los mensajes están en correcto funcionamiento, se pueden crear en el foro y estos estarán relacionados al usuario y el foro que los creó.
+   Ya se pueden tener conversaciones.
 
 ## Trabajo en Progreso
 
-- Ruta Privada para Registrar Administradoress
-Actualmente, estamos trabajando en la implementación de una ruta privada para registrar administradores. Esta característica permitirá a los usuarios con privilegios adecuados registrar nuevos administradores en el sistema.
+- Integración del contenido para la página de educación.
+- Administración de las estadísticas
 
-//Recuerda crear el archivo .env con el valor del token JWT_KEY en el backend para su correcto funcionamiento, ya que este archivo no debe ser subido en el repositorio. 
-Lo mismo para el .env del front-end con su PUBLIC_URL_PATH donde iría el local host
+## IMPORTANTE
+
+Se deben crear los archivos .env en ambas partes. Se agregó una nueva variable de entorno para el front end, que es la clave de la ruta privada. Esta será la que decidan crear de forma personal, recomiendo usar una clave codificada.

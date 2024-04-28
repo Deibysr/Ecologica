@@ -11,13 +11,12 @@ export async function loginUser(req, res){
         console.log(JWT_SECRET)
         if (!user) {
             console.error("No existe un usuario con ese correo: ", email)
-            res.status(400).send("Este correo no existe")
+            return res.status(400).json({error:"Este correo no existe"});
         }
         const isPassword = await comparePassword(password, user.password)
         if (!isPassword) {
             console.error("Esta mal la contraseña: ")
-            res.status(401).send("Contraseña no pertenece al usuario")
-            return
+            return res.status(401).json({error:"La contraseña es incorrecta, pruebe nuevamente"})
         }
         const userResult = user.toJSON();
         delete userResult.password;
@@ -27,6 +26,7 @@ export async function loginUser(req, res){
         console.log(`user: ${userResult.name} ha sido logeado correctamente`);
         res.json({ user: userResult, token }); // ! New
     } catch (error) {
-        
+        console.error(error);
+        return res.status(500).json({error:"Ha habido un error al loggear el usuario."});
     }
 }

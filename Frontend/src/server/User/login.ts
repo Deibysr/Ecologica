@@ -1,7 +1,3 @@
-// Importa la interfaz User desde donde la tengas definida
-import type { User } from "../../interfaces/User";
-
-
 const URL = import.meta.env.PUBLIC_URL_PATH; 
 
 export default async function userLogin(email: string, password: string) {
