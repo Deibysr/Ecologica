@@ -6,7 +6,6 @@ import { useState } from "react";
 import { Toaster } from "sonner";
 
 
-
 export default function ListOfForums({forums}: {forums:Forum[]}){
     const {isAdmin} = useAuth();
     const [openForm, setOpenForm] = useState(false);

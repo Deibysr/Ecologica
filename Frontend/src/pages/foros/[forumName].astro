@@ -7,8 +7,14 @@ import type { Forum } from "@/interfaces/Forum";
 
 export const prerender = false;
 const { forumName } = Astro.params;
-const forums = await getAllForums();
-const currentForum = forums.find((forum:Forum) => forum.title === forumName);
+let forums = [];
+let currentForum = null;
+try {
+    forums = await getAllForums();
+    currentForum = forums.find((forum:Forum) => forum.title === forumName);
+} catch (error) {
+    console.error(error);
+}
 ---
 
 <Layout
@@ -30,6 +36,7 @@ const currentForum = forums.find((forum:Forum) => forum.title === forumName);
                     >reciclaje</span
                 > de nuestra Universidad.
             </p>
+
         </div>
         <div class="flex flex-col lg:flex-row gap-6">
             {
@@ -38,7 +45,7 @@ const currentForum = forums.find((forum:Forum) => forum.title === forumName);
                 <section class="flex-1 mt-6 min-h-[80vh] flex flex-col items-center gap-8 border-l-2">
                     <h2 class="text-2xl font-bold ">Bienvenido a la sección de foros</h2>
                     <h3 class="text-lg font-normal">Por favor, elige algún foro de la izquierda...</h3>
-                    <img width="300" src="https://www.troublefreepool.com/media/mr-bean-waiting-gif.190931/full" alt="Gif de mr bean esperando">
+                    <a href="/test"><img  width="300" src="https://www.troublefreepool.com/media/mr-bean-waiting-gif.190931/full" alt="Gif de mr bean esperando"></a>
                 </section>
                 :
                 <ListOfForums forums={forums} client:load/>
