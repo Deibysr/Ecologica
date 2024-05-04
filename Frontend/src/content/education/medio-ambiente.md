@@ -1,9 +1,7 @@
 ---
-title: "Hello World"
-pubDate: 2024-05-07
-description: " Hello this is my first recommendation"
-image:
-tags: ["astro", "javascript"]
+title: "¡Aprende más sobre el medio ambiente! Toda la información."
+description: "En esta página aprenderás todo lo referente al medio ambiente, como el cambio climático y demás eventos que nos afectan directamente. "
+slug: medio-ambiente
 ---
 
 # El medio ambiente
@@ -126,7 +124,7 @@ Recordemos que las centrales termicas de combustibles Fósiles contaminan princi
 ### Centrales Térmicas de Combustibles Fósiles
 Las centrales que queman carbón, petróleo o gas natural son grandes contribuyentes a varios tipos de contaminación:
 
-![Centrales Termicas de combustión Fósil](image.png)
+![Centrales Termicas de combustión Fósil](/Frontend/public/img/content/image.png)
 Central termica de combustión Fósil
 
 - **Gases de efecto invernadero:** Principalmente dióxido de carbono (CO2), que es un contribuyente significativo al cambio climático.
@@ -137,7 +135,7 @@ Central termica de combustión Fósil
 ### Centrales Hidroeléctricas
 Aunque son mucho menos contaminantes en términos de emisiones al aire, las centrales hidroeléctricas pueden tener impactos ambientales significativos:
 
-![Central Hidroelectrica](cdf915b8-fbd0-40d5-ac09-a599b9b7b5f1.webp)
+![Central Hidroelectrica](/Frontend/public/img/content/cdf915b8-fbd0-40d5-ac09-a599b9b7b5f1.webp)
 Central Hidroelectrica
 
 - **Alteración de ecosistemas:** Pueden alterar los hábitats acuáticos y terrestres locales, afectando la biodiversidad.
@@ -146,7 +144,7 @@ Central Hidroelectrica
 ### Centrales Nucleares
 Las centrales nucleares no emiten CO2 durante la generación de energía, pero presentan otros riesgos y contaminantes:
 
-![Central Nuclear ](6e99fc7b-943d-4255-855a-ad532904c326.webp)
+![Central Nuclear ](/Frontend/public/img/content/6e99fc7b-943d-4255-855a-ad532904c326.webp)
 Central de Energía Nuclear
 
 - **Residuos radiactivos:** Generan residuos que pueden permanecer radiactivos y peligrosos durante miles de años y deben ser manejados y almacenados con extremo cuidado.
@@ -155,23 +153,27 @@ Central de Energía Nuclear
 ### Centrales de Energía Renovable
 Las centrales de energía solar y eólica tienen un impacto ambiental mucho menor en comparación con las fuentes de energía convencionales. Sin embargo, también tienen algunos efectos:
 
-![Central de Energía Renovable ](ff7375fe-afc7-46e5-b866-70d8c71918a3.webp)
+![Central de Energía Renovable ](/Frontend/public/img/content/ff7375fe-afc7-46e5-b866-70d8c71918a3.webp)
 Central de Energía Renovable
 
 - **Impacto visual y uso del suelo:** Especialmente en el caso de las granjas eólicas y los grandes parques solares.
 - **Producción y desecho de materiales:** La fabricación y eventual disposición de paneles solares y turbinas eólicas implican el uso y manejo de materiales que podrían ser tóxicos o contaminantes si no se manejan correctamente.
+
+### Fusion Nuclear
+La fusion nuclear es una tecnologia avanzada con muchos puntos positivos pero que tienen que superar obstaculos con los costes economicos.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_EFCZdnBwrg?si=XTNZDyRkwq_u3rRe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## ¿Qué es la huella de carbono?
 La huella de carbono es una medida del impacto total de las emisiones de gases de efecto invernadero causadas directa o indirectamente por una actividad o acumuladas durante la vida de un producto. Se mide en unidades de dióxido de carbono equivalente (CO2e) y refleja la suma de todos los gases de efecto invernadero emitidos, convertidos a su equivalente de CO2 en términos de su potencial de calentamiento global.
 
 **Calculadoras en línea:** Invitamos al lector a calcular la huella de carbono en MyClimate donde se ofrece calculadoras donde puedes ingresar información sobre tu estilo de vida o actividades empresariales para obtener una estimación de tu huella de carbono. [Calcula tu huella de carbono](https://www.myclimate.org/en/)
 
-![Pantallazo de Myclimate ](Paginaweb1.png)
+![Pantallazo de Myclimate ](/Frontend/public/img/content/Paginaweb1.png)
 Utiliza el traductor del navegador para responder las preguntas realizadas y hacer la conversión adecuada de Euros a Pesos Colombianos.
 
 Otra alternativa para el calculo de huella de carbono la encontramos en ClimateTrade [Calcula tu huella de carbono en ClimateTrade](https://market.climatetrade.com/carbon-footprint-calculator/es). Se recomienda estar en un espacio donde tenga la disponibilidad de datos de consumo de energía electrica
 
- ![Pantallazo de ClimateTrade ](Paginaweb2.png)
+ ![Pantallazo de ClimateTrade ](/Frontend/public/img/content/Paginaweb2.png)
 
  Calcular nuestra huella de carbono aumenta nuestra conciencia sobre como las actividades diarias contribuyen a la emision de gases de efecto invernadero y esto nos puede generar pequeñas acciones sostenibles que ayuden al mundo.
 
