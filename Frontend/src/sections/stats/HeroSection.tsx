@@ -3,9 +3,8 @@ import PrincipalButton from "../../components/UI/PrincipalButton.tsx";
 import { StadisticModal } from "../../components/Stats/StadisticModal.tsx";
 
 
-
 export function HeroSection(){
-  const [openModal, setOpenModal] = useState(false)
+  const [openModal, setOpenModal] = useState(false);
   const [showDatePicker, setShowDatePicker] = useState(false); // Estado para controlar la visibilidad del input
   const [selectedDate, setSelectedDate] = useState(""); // Estado para almacenar la fecha seleccionada
 
@@ -17,17 +16,12 @@ export function HeroSection(){
   return(    
     <section className="py-12">
       <h1 className="text-xl sm:text-2xl font-bold text-balance lg:text-5xl">
-        Estadísticas de <span
-          className="bg-gradient-to-r from-ecologica-primary to-ecologica-secondary text-transparent bg-clip-text"
-          >ecológia</span
-        >
+        Estadísticas de <span className="bg-gradient-to-r from-ecologica-primary to-ecologica-secondary text-transparent bg-clip-text">ecológia</span>
       </h1>
       <p className="mt-5 text-sm lg:text-xl text-gray-700">
         No podemos mejorar lo que no se puede medir por eso le mostramos a la
         comunidad universitaria los <span
-          className="bg-gradient-to-r from-ecologica-primary to-ecologica-secondary text-transparent bg-clip-text font-bold"
-          >datos </span
-        > en formato estadístico para que puedan visualizar comodamente los resultados
+          className="bg-gradient-to-r from-ecologica-primary to-ecologica-secondary text-transparent bg-clip-text font-bold">datos </span> en formato estadístico para que puedan visualizar comodamente los resultados
       </p>
       <div className="flex justify-center items-center mt-8 mb-8">
         <PrincipalButton onClick={() => setOpenModal(true)}> Depositar </PrincipalButton>

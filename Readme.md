@@ -24,4 +24,4 @@ Seguir los siguientes pasos:
 2. Colocar el markdown en la carpeta content/education
 3. Importante que NO poner las imágenes en la carpeta anterior si no en la carpeta "public/img/content"
 4. Poner nombres descriptivos a las imágenes.
-5. Optimizar las imágenes antes de ponerlas en la carpeta. (Usar la página Squoosh y dejarlas en formato .webp)
+5. Optimizar las imágenes antes de ponerlas en la carpeta. (Usar la página Squoosh y dejarlas en formato .webp

@@ -12,7 +12,7 @@ export async function registerUser(req, res) {
         const user = await User.create(userData)
         const userResult = user.toJSON();
         delete userResult.password;
-        const token = jwt.sign({ userResult }, JWT_SECRET, { expiresIn: '24h' });
+        const token = jwt.sign({ userResult }, JWT_SECRET, { expiresIn: '1h' });
         console.log(`user: ${userResult.name} ha sido creado correctamente`);
         res.json({ user: userResult, token });
 

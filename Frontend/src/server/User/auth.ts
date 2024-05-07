@@ -3,11 +3,9 @@ import getSession from "../../helpers/getSession";
 function isSessionExpired(){
     const sessionDataString = getSession();
     if(!sessionDataString) return true;
-
     const sessionData = JSON.parse(sessionDataString);
     const currentTime = new Date().getTime();
-    const expiredTime = new Date(sessionData.expiredTime).getTime();
-
+    const expiredTime = new Date(sessionData.expirationTime).getTime();
     return currentTime > expiredTime;
 }
 
