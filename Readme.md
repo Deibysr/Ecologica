@@ -2,18 +2,21 @@
 
 ## Características Añadidas:
 
-1. Ver foros en la página principal.
-   Ahora los foros que se creen se cargan automáticamente en el home también.
-2. Automatización del sistema de contenido.
-   Se programó la gestión del contenido de eduación, para que se puedan agregar nuevos
-   contenidos fácilmente. 
-3. Se mejoró la performance de la página de estadísticas
+1. Se solucionó un bug en el inicio de sesión.
+2. Se arregló un bug en la página de estadísticicas
+3. Se re diseñó el modelo de estadísticas
+4. Se agregó el model materiales.
+5. Se crearon los controladores para crear estadísticas con sus materiales.
+6. Se crearon los controladores para obtener materiales por mes, año y obtener todos.
+   
 
 ## Trabajo en Progreso
 
-- Se está integrando el sistema de estadísticas.
-- Se está integrando la posibilidad de subir estadísticas por medio de CSV.
-
+- Se está integrando el api construida en el front
+- Se está creando un nuevo controlador que recibe CSV
+- Se está integrando en el front un sistema para subir CSV
+- Se está arreglando la UI de los formularios para mobile.
+  
 ## IMPORTANTE
 
 Se deben crear los archivos .env en ambas partes. Se agregó una nueva variable de entorno para el front end, que es la clave de la ruta privada. Esta será la que decidan crear de forma personal, recomiendo usar una clave codificada.
