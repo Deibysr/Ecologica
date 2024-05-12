@@ -2,20 +2,11 @@
 
 ## Características Añadidas:
 
-1. Se solucionó un bug en el inicio de sesión.
-2. Se arregló un bug en la página de estadísticicas
-3. Se re diseñó el modelo de estadísticas
-4. Se agregó el model materiales.
-5. Se crearon los controladores para crear estadísticas con sus materiales.
-6. Se crearon los controladores para obtener materiales por mes, año y obtener todos.
+1. Ahora se pueden subir datos con un archivo formato CSV.
+2. Los datos cargan en tiempo real para todas las estadísticas
+3. Se hicieron endpoint para meseses, año y total.
+4. Todo está incluido en el front.
    
-
-## Trabajo en Progreso
-
-- Se está integrando el api construida en el front
-- Se está creando un nuevo controlador que recibe CSV
-- Se está integrando en el front un sistema para subir CSV
-- Se está arreglando la UI de los formularios para mobile.
   
 ## IMPORTANTE
 

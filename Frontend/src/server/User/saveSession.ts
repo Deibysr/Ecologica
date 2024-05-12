@@ -2,7 +2,7 @@ import type { User } from "../../interfaces/User";
 
 export default function saveSession({user, token}:{user:User | null, token: string}){
     const expirationTime = new Date();
-    expirationTime.setHours(expirationTime.getHours() + 24);
+    expirationTime.setHours(expirationTime.getHours() + 12);
     const sessionData = {
         user: user ?? {msg: "NO user"},
         token, 

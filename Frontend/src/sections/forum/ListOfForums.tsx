@@ -17,10 +17,10 @@ export default function ListOfForums({forums}: {forums:Forum[]}){
     return(
         <section
             id="forum-section"
-            className="pb-3 lg:pb-0 flex flex-row overflow-x-scroll lg:overflow-x-hidden lg:flex-col gap-3 mt-10 flex-[0.6]">
+            className="flex-[0.6]">
             {
                 isAdmin &&
-                <>
+                <div className="mt-6">
                     <button onClick={handleOpen} className="hover:bg-emerald-600 w-full bg-green-600 text-white p-3 rounded-xl font-medium flex justify-center items-center gap-2">
                         Crear foro
                         <span>
@@ -30,21 +30,23 @@ export default function ListOfForums({forums}: {forums:Forum[]}){
                         </span>
                     </button>
                     <CreateForumForm open={openForm}/>
-                </>
+                </div>
             }
-
-            {
-                forums.length > 0 ? 
-                forums.map((forum) => (
-                    <ItemForum
-                        key={forum.id}
-                        title={forum.title}
-                        description={forum.description}
-                        id={forum.id as number}
-                    />
-                ))
-                : <p className="font-bold text-center w-full text-sm">Todavía no hay ningún foro...</p>
-            }
+            <div className="pb-3 lg:pb-0 flex flex-row overflow-x-scroll lg:overflow-x-hidden lg:flex-col gap-3 mt-10">
+                {
+                    forums.length > 0 ? 
+                    forums.map((forum) => (
+                        <ItemForum
+                            key={forum.id}
+                            title={forum.title}
+                            description={forum.description}
+                            id={forum.id as number}
+                        />
+                    ))
+                    : <p className="font-bold text-center w-full text-sm">Todavía no hay ningún foro...</p>
+                }
+            </div>         
+           
             <Toaster richColors position="bottom-left" expand={true}/>
         </section>
     );

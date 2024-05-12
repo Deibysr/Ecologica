@@ -1,115 +1,130 @@
-import { useEffect, useRef, useState, type Dispatch, type SetStateAction, type ChangeEventHandler } from "react"
+import { useEffect, useRef, useState, type Dispatch, type SetStateAction, type FormEventHandler } from "react"
 import PrincipalButton from "../UI/PrincipalButton"
 import Chart from 'chart.js/auto';
+import createPie from "@/helpers/createPieStats";
+import MATERIALS from "@/const/MATERIALS";
+import { getMonthName } from "@/helpers/getMonthName";
+import calcMonth from "@/util/calcMonth";
+import getDataByMonth from "@/server/Stats/getDataByMonth";
+import processData from "@/util/processData";
 
-
-interface Props {openModal: boolean, 
-    setOpenModal:Dispatch<SetStateAction<boolean>>}
-
-interface ValuesRecicly {
-    plastic:number
-    stacks: number,
-    paper: number,
-    organic: number,
+interface Props {
+    openModal: boolean,
+    setOpenModal: Dispatch<SetStateAction<boolean>>
 }
 
-export function StadisticModal({openModal=false, setOpenModal}:Props) { 
-    const [valuesRecicly, setValuesRecicly] = useState({
-        plastic: 20,
-        stacks: 40,
-        paper: 15,
-        organic: 50,
-    })
-    const [data, setData] = useState([20, 40, 15, 50]);
+interface ValuesRecicly {
+    plastic: number
+    stacks: number,
+    paper: number,
+    organic: number
+}
+
+export function StadisticModal({ openModal = false, setOpenModal }: Props) {
+    const tempValue = useRef({} as any);
+    const baseData = useRef({} as any);
+    const currentData = useRef({});
+    const [data, setData] = useState([]);
+    const [valuesRecicly, setValuesRecicly] = useState({} as any);
 
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const instanceChart = useRef<Chart<"pie", number[], string> | null>(null);
 
-    const handleInput= (e: React.ChangeEvent<HTMLInputElement>)=>{
+    const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const input = e.target;
-        if(!(input && (input instanceof HTMLInputElement))) return;
+        if (!(input && (input instanceof HTMLInputElement))) return;
         const value = input.value;
         const key: keyof ValuesRecicly = input.name as keyof ValuesRecicly;
-        const copyValues = {...valuesRecicly};
+        const copyValues = { ...valuesRecicly };
         copyValues[key] = Number(value);
-        setValuesRecicly(inicialValues => {
-            copyValues[key] += inicialValues[key]
+        if(!value) return;
+        if(tempValue.current[key] === value) return;
+        // if((baseData.current[key] + valuesRecicly[key] > ))
+        setValuesRecicly((inicialValues:any) => {
+            console.log(copyValues)
+            copyValues[key] += inicialValues[key];
+            // tempValue.current[key] = value;
+            // currentData.current = copyValues;
             return copyValues
-        });
+        });     
+    }
 
-    } 
-    const labels = ["Plástico", "pilas", "Carton/papel", "Orgánico"]
-    const backgroundColors = ["#246876", "#9cc824", "#1c64ca", "#0c174b"]
+    const handleSubmit:FormEventHandler<HTMLFormElement> = async (e)=>{
+        e.preventDefault();
+    };
 
-    const createPie = (ctx:CanvasRenderingContext2D, data:number[], labels:string[], colors:string[])=> new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: labels,
-                datasets: [
-                {
-                    label: 'Cantidad de residuos',
-                    data,
-                    backgroundColor: colors,
-                },
-                ],
-            },
-            options: {
-                indexAxis: 'y', 
-                scales: {
-                y: { beginAtZero: true, grid: { display: false } },
-                x: { grid: { display: false } },
-                },
-            },
-            });
-
-
-    useEffect(()=>{
-        const dataToRender = Object.values(valuesRecicly);
-        setData(dataToRender);
-    
-        if(instanceChart.current){
+    useEffect(() => {
+        const data = Object.values(valuesRecicly);
+        setData(data as any);
+        if (instanceChart.current) {
             instanceChart.current.destroy();
             instanceChart.current = null;
         }
-        
     }, [valuesRecicly])
 
     useEffect(() => {
-
         if (!canvasRef.current) return;
         const ctx = canvasRef.current.getContext('2d');
-        if(!ctx) return;
-        if(!instanceChart.current){
-            console.log(data)
-            instanceChart.current = createPie(ctx, data, labels, backgroundColors)  
+        if (!ctx) return;
+        if (!instanceChart.current) {
+            instanceChart.current = createPie(ctx, data)
         }
-        
-  }, [data]);
+    }, [data]);
+
+    useEffect(()=>{
+        const setDataDB = async ()=>{
+            if(openModal && data.length === 0){
+                const currentMonth = calcMonth();
+                const dataOfMonth = await getDataByMonth(currentMonth);
+                if(!(dataOfMonth.materials && dataOfMonth.materials.length > 1)) return;
+                const dataCurrentMonth = processData(dataOfMonth.materials);
+                setData(dataCurrentMonth as any);
+                baseData.current = dataCurrentMonth;
+                const reciclyData = {} as any;
+                MATERIALS.forEach((material, index)=> reciclyData[material.toLowerCase()] = dataCurrentMonth[index]);
+                setValuesRecicly(reciclyData);
+            }
+        }
+       setDataDB();
+    }, [openModal])
 
     return (
-    <div className={`w-full h-full fixed inset-0 bg-black bg-opacity-50 justify-center items-center ${openModal ? "flex":"hidden"}`}>
-        
-        <div className="w-full h-auto rounded-lg border border-gray-800 bg-gray-100 p-6 text-left">
-        <div className="flex justify-between">
-            <h3 className="font-bold text-2xl my-6">Añadir nueva cantidad</h3>
-            <button className="top-0" onClick={()=> setOpenModal(false)} >❌</button>
-        </div>
+        <div className={`w-full h-full z-[999] fixed inset-0 bg-black bg-opacity-50 justify-center items-center p-12 ${openModal ? "flex" : "hidden"}`}>
 
-        <div className="w-full flex justify-center items-center flex-col lg:flex-row gap-6">
-            <form className="w-full flex flex-col gap-3">
-                <input onBlur={handleInput} type="number" name="stacks" className="w-full p-2 focus:bg-gray-200 focus:outline-none rounded-lg" placeholder="Añade la cantidad de pilas" />
-                <input onBlur={handleInput} type="number" name="paper" className="w-full p-2 focus:bg-gray-200 focus:outline-none rounded-lg" placeholder="Añade la cantidad de papel/cartón" />
-                <input onBlur={handleInput} type="number" name="plastic" className="w-full p-2 focus:bg-gray-200 focus:outline-none rounded-lg" placeholder="Añade la cantidad de plástico" />
-                <input onBlur={handleInput} type="number" name="organic" className="w-full p-2 focus:bg-gray-200 focus:outline-none rounded-lg" placeholder="Añade la cantidad de orgánico" />
-            </form>
-            <div className="w-full max-w-[600px] lg:max-w-[480px] md:max-w-[300px]">
-                <canvas ref={canvasRef} />
+            <div className="w-full rounded-lg border border-gray-800 bg-gray-100 p-6 text-left">
+                <div className="flex justify-between">
+                    <span></span>
+                    <button className="top-0" onClick={() => setOpenModal(false)} >❌</button>
+                </div>
+
+                <div className="w-full flex justify-center items-center flex-col lg:flex-row gap-6">
+                    <form onSubmit={handleSubmit} className="w-full">
+                        <h3 className="font-bold text-lg md:text-2xl my-6">Añadir nueva cantidad de {getMonthName()} - {new Date().getFullYear()}</h3>
+                        <div className="grid grid-cols-2 gap-4">
+                            {
+                                MATERIALS.map(material=>(
+                                    <label key={material}>
+                                        {material}
+                                        <input
+                                            className="text-sm md:text-base p-1 py-2 rounded-lg ps-2 focus:outline-none focus:bg-gray-200" 
+                                            onBlur={handleInput}
+                                            type="number" 
+                                            name={material.toLowerCase()} 
+                                            placeholder={`Cantidad ${material}`}/>
+                                    </label>
+                                ))
+                            }
+                        </div>
+                    </form>
+                    <div className="w-full max-w-[250px] lg:max-w-[480px] md:max-w-[300px]">
+                        <h3 className="ms-3 mb-2">Últimos datos registrados para <span className="font-bold">{getMonthName()}</span></h3>
+                        <canvas ref={canvasRef} />
+                    </div>
+
+                </div>
+                <PrincipalButton> Deposito </PrincipalButton>
             </div>
 
         </div>
-        <PrincipalButton> Deposito </PrincipalButton>
-        </div>
-
-    </div>
     )
 }

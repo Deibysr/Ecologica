@@ -20,7 +20,6 @@ export default function CreateForumForm({open}:{open:boolean}){
         const token = getTokenFromSession();
         if(!token) return;
         const resultForum = await createForum(token, forumData);
-        console.log(resultForum)
         if(resultForum){
             toast.success("El foro se ha creado correctamente");
         }else{
