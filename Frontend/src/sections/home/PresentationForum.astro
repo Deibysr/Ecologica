@@ -1,12 +1,12 @@
 ---
 import getAllForums from "@/server/Forum/getAllForums";
 import CardForum from "../../components/Forums/CardForum.astro";
-import MonthStats from "../../components/Stats/MonthStats.astro";
 import type { Forum } from "@/interfaces/Forum";
+import MonthStats from "@/components/Stats/MonthStats.astro";
 
 let forums = [];
 try {
-  forums = await getAllForums();  
+  forums = (await getAllForums()).slice(0, 3);  
 } catch (error) {
   console.error(error);
 }
@@ -17,7 +17,7 @@ try {
 {
   forums.length > 0 &&
   <h2 class="text-2xl font-bold">¡Únete a nuestros foros de discusión!</h2>
-  <div class="flex gap-12">
+  <div class="flex gap-12 flex-wrap lg:flex-nowrap  justify-center">
     {
       forums.map((forum: Forum)=>(
         <CardForum
@@ -29,11 +29,8 @@ try {
     }
   </div>
  }
-  <!-- MonthStats -->
-  <div
-    class="p-4 my-4 text-black flex justify-center flex-col items-center w-full"
-  >
+  <div class="p-4 my-4 text-black flex justify-center flex-col items-center w-full">
     <h2 class="lg:text-2xl font-medium m-3">Reciclaje del mes actual</h2>
-    <MonthStats />
+    <MonthStats/>
   </div>
 </section>

@@ -1,36 +1,24 @@
 <script>
-  import Chart from "chart.js/auto";
-  const canvas = document.getElementById(
-    "canvasCircleMonty"
-  ) as HTMLCanvasElement;
-  const ctx = canvas.getContext("2d");
-  if (ctx) {
-    new Chart(ctx, {
-      type: "doughnut",
-      data: {
-        labels: ["Plastico", "Carton/papel", "Organico", "Pilas"],
-        datasets: [
-          {
-            label: "Cantidad de residuos",
-            data: [20, 30, 40, 50],
-            backgroundColor: ["#246876", "#9cc824", "#1c64ca", "#0c174b"],
-          },
-        ],
-      },
-      options: {
-        indexAxis: "y",
-        scales: {
-          y: {
-            beginAtZero: true,
-            grid: { display: false },
-            ticks: { display: false },
-          },
-        },
-      },
-    });
-  }
+import createPie from "@/helpers/createPieStats";
+import getDataByMonth from "@/server/Stats/getDataByMonth";
+import calcMonth from "@/util/calcMonth";
+import processData from "@/util/processData";
+
+const loadData = async () => {
+    const currentMonth = calcMonth();
+    const dataOfMonth = await getDataByMonth(currentMonth);
+    if (!(dataOfMonth.materials && dataOfMonth.materials.length > 1)) return;
+    const dataCurrentMonth = processData(dataOfMonth.materials);
+    const canvas = document.querySelector("#month-home-stats");
+    if (!canvas || !(canvas instanceof HTMLCanvasElement)) return;
+    const ctx = canvas.getContext("2d");
+    if(!ctx) return;
+    createPie(ctx, dataCurrentMonth);
+};
+
+document.addEventListener("DOMContentLoaded", loadData);
 </script>
 
-<div class="max-w-[600px] w-full">
-  <canvas id="canvasCircleMonty"> </canvas>
+<div class="max-w-[420px] w-full">
+    <canvas id="month-home-stats"> </canvas>
 </div>

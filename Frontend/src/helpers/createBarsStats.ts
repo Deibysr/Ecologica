@@ -1,8 +1,10 @@
+import COLORS from "@/const/COLORS";
 import MATERIALS from "@/const/MATERIALS";
-import { Chart } from "chart.js";
+import { Chart, BarController, CategoryScale, LinearScale, BarElement } from 'chart.js';
 
-export default function createBarsStats(ctx:CanvasRenderingContext2D, data: []){
-    new Chart(ctx, {
+export default function createBarsStats(ctx:CanvasRenderingContext2D, data: [], direction: "y" | "x" = "x"){
+  Chart.register(BarController, CategoryScale, LinearScale, BarElement);
+  new Chart(ctx, {
         type: "bar",
         data: {
           labels: MATERIALS,
@@ -10,16 +12,16 @@ export default function createBarsStats(ctx:CanvasRenderingContext2D, data: []){
             {
               label: "Cantidad de residuos",
               data,
-              backgroundColor: ["#246876", "#9cc824", "#1c64ca", "#0c174b"],
+              backgroundColor: COLORS
             },
           ],
         },
         options: {
-          indexAxis: "x",
+          indexAxis: direction,
           scales: {
-            y: { beginAtZero: true, grid: { display: false } },
-            x: { grid: { display: false } },
+            [direction === "x" ? "y" : "x"]: {type: "linear", beginAtZero: true},
           },
         },
       });
 }
+

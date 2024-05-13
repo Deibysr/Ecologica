@@ -9,7 +9,6 @@ import getDataByMonth from "@/server/Stats/getDataByMonth";
 import processData from "@/util/processData";
 import updateDataOneMonth from "@/server/Stats/updateDataOneMonth";
 import getCurrentDate from "@/helpers/getCurrentDate";
-import type { Material } from "@/interfaces/Materials";
 import { toast } from "sonner";
 import getTokenFromSession from "@/helpers/getTokenFromSession";
 
@@ -97,13 +96,11 @@ export function StadisticModal({ openModal = false, setOpenModal }: Props) {
 
     return (
         <div className={`w-full h-full z-[999] fixed inset-0 bg-black bg-opacity-50 justify-center items-center p-12 ${openModal ? "flex" : "hidden"}`}>
-
             <div className="w-full rounded-lg border border-gray-800 bg-gray-100 p-6 text-left">
                 <div className="flex justify-between">
                     <span></span>
                     <button className="top-0" onClick={() => setOpenModal(false)} >❌</button>
                 </div>
-
                 <div className="w-full flex justify-center items-center flex-col lg:flex-row gap-6">
                     <form className="w-full">
                         <h3 className="font-bold text-lg md:text-2xl my-6">Añadir nueva cantidad de {getMonthName()} - {new Date().getFullYear()}</h3>
@@ -127,11 +124,9 @@ export function StadisticModal({ openModal = false, setOpenModal }: Props) {
                         <h3 className="ms-3 mb-2">Últimos datos registrados para <span className="font-bold">{getMonthName()}</span></h3>
                         <canvas ref={canvasRef} />
                     </div>
-
                 </div>
                 <PrincipalButton onClick={handleSubmit}> Deposito </PrincipalButton>
             </div>
-
         </div>
     )
 }

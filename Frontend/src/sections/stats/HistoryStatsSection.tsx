@@ -16,7 +16,7 @@ export default function HistoryStatsSection(){
             if (!refCurrentHistory.current) return;
             const ctxCurrent = refCurrentHistory.current.getContext('2d');
             if (!ctxCurrent) return;
-            createBarsStats(ctxCurrent, dataConvert as any);
+            createBarsStats(ctxCurrent, dataConvert as []);
             setTimeout(()=>{
                 setLoad(true);
             }, 500)
