@@ -75,7 +75,6 @@ export default function InputUpload({ openModal = false, setOpenModal }: Props) 
                     {success && <button className="mt-2 bg-ecologica-primary text-white rounded-lg p-1 px-3 text-sm">Enviar</button>}
                 </form>
             </div>
-            <Toaster richColors position="bottom-left" expand={true}/>
         </div>
     )
 }

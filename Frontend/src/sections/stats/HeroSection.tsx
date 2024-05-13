@@ -3,7 +3,7 @@ import PrincipalButton from "../../components/UI/PrincipalButton.tsx";
 import { StadisticModal } from "../../components/Stats/StadisticModal.tsx";
 import InputUpload from "@/components/Stats/InputUpload.tsx";
 import useAuth from "@/hooks/useAuth.ts";
-
+import { Toaster } from "sonner";
 
 export function HeroSection(){
   const {isAdmin} = useAuth();
@@ -29,6 +29,7 @@ export function HeroSection(){
 
       <StadisticModal setOpenModal={setOpenModalIndividual} openModal={openModalIndividual}/>
       <InputUpload setOpenModal={setOpenInputLoad} openModal={openInputLoad}/>
+      <Toaster richColors position="bottom-left" expand={true}/>
   </section>
   )
 }

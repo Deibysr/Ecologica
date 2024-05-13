@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type Dispatch, type SetStateAction, type FormEventHandler } from "react"
+import { useEffect, useRef, useState, type Dispatch, type SetStateAction, type FormEventHandler, type ChangeEvent } from "react"
 import PrincipalButton from "../UI/PrincipalButton"
 import Chart from 'chart.js/auto';
 import createPie from "@/helpers/createPieStats";
@@ -7,60 +7,61 @@ import { getMonthName } from "@/helpers/getMonthName";
 import calcMonth from "@/util/calcMonth";
 import getDataByMonth from "@/server/Stats/getDataByMonth";
 import processData from "@/util/processData";
+import updateDataOneMonth from "@/server/Stats/updateDataOneMonth";
+import getCurrentDate from "@/helpers/getCurrentDate";
+import type { Material } from "@/interfaces/Materials";
+import { toast } from "sonner";
+import getTokenFromSession from "@/helpers/getTokenFromSession";
 
 interface Props {
     openModal: boolean,
     setOpenModal: Dispatch<SetStateAction<boolean>>
 }
 
-interface ValuesRecicly {
-    plastic: number
-    stacks: number,
-    paper: number,
-    organic: number
-}
+interface ValuesRecicly {[key:string]: number}
 
 export function StadisticModal({ openModal = false, setOpenModal }: Props) {
-    const tempValue = useRef({} as any);
-    const baseData = useRef({} as any);
-    const currentData = useRef({});
-    const [data, setData] = useState([]);
-    const [valuesRecicly, setValuesRecicly] = useState({} as any);
-
+    const tempValue = useRef<ValuesRecicly>({});
+    const baseData = useRef<ValuesRecicly>({});
+    const [data, setDataStats] = useState<number[]>([]);
+    const [valuesToSend, setValuesToSend] = useState<ValuesRecicly>({});
+    const [valuesRender, setValuesRender] = useState<ValuesRecicly>({});
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const instanceChart = useRef<Chart<"pie", number[], string> | null>(null);
 
-    const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const input = e.target;
-        if (!(input && (input instanceof HTMLInputElement))) return;
-        const value = input.value;
-        const key: keyof ValuesRecicly = input.name as keyof ValuesRecicly;
-        const copyValues = { ...valuesRecicly };
-        copyValues[key] = Number(value);
-        if(!value) return;
-        if(tempValue.current[key] === value) return;
-        // if((baseData.current[key] + valuesRecicly[key] > ))
-        setValuesRecicly((inicialValues:any) => {
-            console.log(copyValues)
-            copyValues[key] += inicialValues[key];
-            // tempValue.current[key] = value;
-            // currentData.current = copyValues;
-            return copyValues
-        });     
+    const handleInput = (e:ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        if (!value || tempValue.current[name] === Number(value)) return;
+        const sumValue = baseData.current[name] + Number(value);
+        const updatedValues = { ...valuesRender, [name]: sumValue };
+        setValuesRender(updatedValues);
+        tempValue.current[name] = Number(value);
+        setValuesToSend(prevObj=> ({...prevObj, [name]: Number(value)}));
     }
 
-    const handleSubmit:FormEventHandler<HTMLFormElement> = async (e)=>{
-        e.preventDefault();
+    const handleSubmit= async ()=>{
+        const date = getCurrentDate();
+        const token = getTokenFromSession();
+        const resultData = await updateDataOneMonth(token, {materials:valuesToSend, date});
+        if(resultData.error){
+            toast.error(resultData.error);
+            throw new Error(resultData.error);
+        }
+
+        toast.success(`Datos del mes de ${getMonthName()} subidos`);
+        setTimeout(() => {
+            window.location.reload();
+        }, 2200);
     };
 
     useEffect(() => {
-        const data = Object.values(valuesRecicly);
-        setData(data as any);
+        const data = Object.values(valuesRender);
+        setDataStats(data);
         if (instanceChart.current) {
             instanceChart.current.destroy();
             instanceChart.current = null;
         }
-    }, [valuesRecicly])
+    }, [valuesRender])
 
     useEffect(() => {
         if (!canvasRef.current) return;
@@ -72,20 +73,26 @@ export function StadisticModal({ openModal = false, setOpenModal }: Props) {
     }, [data]);
 
     useEffect(()=>{
-        const setDataDB = async ()=>{
-            if(openModal && data.length === 0){
-                const currentMonth = calcMonth();
-                const dataOfMonth = await getDataByMonth(currentMonth);
-                if(!(dataOfMonth.materials && dataOfMonth.materials.length > 1)) return;
-                const dataCurrentMonth = processData(dataOfMonth.materials);
-                setData(dataCurrentMonth as any);
-                baseData.current = dataCurrentMonth;
-                const reciclyData = {} as any;
-                MATERIALS.forEach((material, index)=> reciclyData[material.toLowerCase()] = dataCurrentMonth[index]);
-                setValuesRecicly(reciclyData);
-            }
+        const setDataStatsDB = async ()=>{
+            if(!openModal || data.length !== 0) return;
+            const currentMonth = calcMonth();
+            const dataOfMonth = await getDataByMonth(currentMonth);
+            if(!(dataOfMonth.materials && dataOfMonth.materials.length > 1)) return;
+            const dataCurrentMonth: number[] = processData(dataOfMonth.materials);
+            setDataStats(dataCurrentMonth);
+            const reciclyData:ValuesRecicly = {};
+            const defaultValues: ValuesRecicly = {};
+            MATERIALS.forEach((material, index)=> {
+                const currentValue = dataCurrentMonth[index];
+                const key = material.toLowerCase();
+                reciclyData[key] = currentValue;
+                defaultValues[key] = 0;
+            });
+            setValuesRender(reciclyData);
+            setValuesToSend(defaultValues);
+            baseData.current = reciclyData;
         }
-       setDataDB();
+        setDataStatsDB();
     }, [openModal])
 
     return (
@@ -98,15 +105,15 @@ export function StadisticModal({ openModal = false, setOpenModal }: Props) {
                 </div>
 
                 <div className="w-full flex justify-center items-center flex-col lg:flex-row gap-6">
-                    <form onSubmit={handleSubmit} className="w-full">
+                    <form className="w-full">
                         <h3 className="font-bold text-lg md:text-2xl my-6">Añadir nueva cantidad de {getMonthName()} - {new Date().getFullYear()}</h3>
                         <div className="grid grid-cols-2 gap-4">
                             {
                                 MATERIALS.map(material=>(
-                                    <label key={material}>
+                                    <label key={material} className="w-full">
                                         {material}
                                         <input
-                                            className="text-sm md:text-base p-1 py-2 rounded-lg ps-2 focus:outline-none focus:bg-gray-200" 
+                                            className="text-sm md:text-base w-full p-1 py-2 rounded-lg ps-2 focus:outline-none focus:bg-gray-200" 
                                             onBlur={handleInput}
                                             type="number" 
                                             name={material.toLowerCase()} 
@@ -122,7 +129,7 @@ export function StadisticModal({ openModal = false, setOpenModal }: Props) {
                     </div>
 
                 </div>
-                <PrincipalButton> Deposito </PrincipalButton>
+                <PrincipalButton onClick={handleSubmit}> Deposito </PrincipalButton>
             </div>
 
         </div>

@@ -6,6 +6,6 @@ export interface Material{
 }
 
 export interface Collection{
-    materials: Material[],
-    date: Date
+    materials: {},
+    date: string
 }
