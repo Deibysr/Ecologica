@@ -14,7 +14,6 @@ const currentPost = posts?.find(post=> post.slug === slug);
 if(!currentPost) return;
 const {Content} = await currentPost.render();
 ---
-
 <Layout title={currentPost.data.title} description={currentPost.data.description}>
     <main class="w-full flex flex-col justify-center items-center border py-16 p-3 lg:px-0">
         <div class="lg:max-w-[700px] w-full mb-4">
