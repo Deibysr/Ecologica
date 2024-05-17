@@ -76,7 +76,7 @@ export function StadisticModal({ openModal = false, setOpenModal }: Props) {
             if(!openModal || data.length !== 0) return;
             const currentMonth = calcMonth();
             const dataOfMonth = await getDataByMonth(currentMonth);
-            if(!(dataOfMonth.materials && dataOfMonth.materials.length > 1)) return;
+            if(!(dataOfMonth.materials && dataOfMonth.materials.length > 0)) return;
             const dataCurrentMonth: number[] = processData(dataOfMonth.materials);
             setDataStats(dataCurrentMonth);
             const reciclyData:ValuesRecicly = {};

@@ -1,24 +1,31 @@
 <script>
-import createPie from "@/helpers/createPieStats";
-import getDataByMonth from "@/server/Stats/getDataByMonth";
-import calcMonth from "@/util/calcMonth";
-import processData from "@/util/processData";
+  import createPie from "@/helpers/createPieStats";
+  import getDataByMonth from "@/server/Stats/getDataByMonth";
+  import calcMonth from "@/util/calcMonth";
+  import { $ } from "@/util/DOMUtils";
+  import processData from "@/util/processData";
 
-const loadData = async () => {
+  const pMessage = $("[data-set-message-month]");
+
+  const loadData = async () => {
     const currentMonth = calcMonth();
     const dataOfMonth = await getDataByMonth(currentMonth);
-    if (!(dataOfMonth.materials && dataOfMonth.materials.length > 1)) return;
+    if (!(dataOfMonth.materials && dataOfMonth.materials.length > 0)) {
+      pMessage.textContent = "No hay datos disponibles";
+      return;
+    }
     const dataCurrentMonth = processData(dataOfMonth.materials);
     const canvas = document.querySelector("#month-home-stats");
     if (!canvas || !(canvas instanceof HTMLCanvasElement)) return;
     const ctx = canvas.getContext("2d");
-    if(!ctx) return;
+    if (!ctx) return;
     createPie(ctx, dataCurrentMonth);
-};
+  };
 
-document.addEventListener("DOMContentLoaded", loadData);
+  document.addEventListener("DOMContentLoaded", loadData);
 </script>
 
 <div class="max-w-[420px] w-full">
-    <canvas id="month-home-stats"> </canvas>
+  <p data-set-message-month></p>
+  <canvas id="month-home-stats"> </canvas>
 </div>

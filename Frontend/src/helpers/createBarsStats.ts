@@ -4,6 +4,7 @@ import { Chart, BarController, CategoryScale, LinearScale, BarElement } from 'ch
 
 export default function createBarsStats(ctx:CanvasRenderingContext2D, data: [], direction: "y" | "x" = "x"){
   Chart.register(BarController, CategoryScale, LinearScale, BarElement);
+  console.log("Call function ", Chart)
   new Chart(ctx, {
         type: "bar",
         data: {

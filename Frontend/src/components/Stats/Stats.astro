@@ -1,11 +1,18 @@
 <script>
 import createBarsStats from "@/helpers/createBarsStats";
 import getAllData from "@/server/Stats/getAllData";
+import { $ } from "@/util/DOMUtils";
 import processData from "@/util/processData";
+
+const pMessage = $("[data-set-message]");
 
 const loadData = async () => {
     const { materials } = await getAllData();
-    if (!(materials && materials.length > 1)) return;
+    console.log(materials)
+    if (!(materials && materials.length > 0)){
+        pMessage.textContent = "No hay datos disponibles";
+        return
+    }
     const dataConvert = processData(materials);
     const canvas = document?.querySelector("#history-home-stats");
     if (!canvas || !(canvas instanceof HTMLCanvasElement)) return;
@@ -19,5 +26,6 @@ document.addEventListener("DOMContentLoaded", loadData);
 </script>
 
 <div class="w-full max-w-[800px]">
+    <p data-set-message></p>
     <canvas id="history-home-stats"> </canvas>
 </div>

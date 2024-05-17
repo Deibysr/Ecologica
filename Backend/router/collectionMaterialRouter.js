@@ -18,6 +18,6 @@ router.post('/createByCSV', authToken, checkIsAdmin, upload.single("file"), crea
 router.get('/getAll', getAllCollections);
 router.post('/getByMonth', getCollectionByMonth);
 router.post('/getByYear', getCollectionByYear);
-router.delete('/deleteAllData', authToken, checkIsAdmin,deleteAllCollections);
+router.delete('/deleteAllData', deleteAllCollections);
 
 export default router;

@@ -6,12 +6,17 @@ import { useEffect, useRef, useState } from "react";
 export default function HistoryStatsSection(){
     const refCurrentHistory = useRef<HTMLCanvasElement>(null);
     const [load, setLoad] = useState(false);
+    const [error, setError] = useState(false);
 
     useEffect(()=>{
         setLoad(false);
+
         const loadData= async ()=>{
             const {materials} = await getAllData();
-            if(!(materials && materials.length > 1)) return;
+            if(!(materials && materials.length > 0)) {
+                setError(true);
+                return
+            }
             const dataConvert = processData(materials);
             if (!refCurrentHistory.current) return;
             const ctxCurrent = refCurrentHistory.current.getContext('2d');
@@ -27,7 +32,10 @@ export default function HistoryStatsSection(){
 
     return (
         <section className="mt-12">
+
             <h3 className="font-semibold text-xl text-center mb-4">Datos históricos</h3>
+            {error && <p>Los datos no han cargado</p>}
+
             <div className={`w-full ${load ? "block" : "hidden"}`}>
                 <canvas ref={refCurrentHistory} />
             </div>

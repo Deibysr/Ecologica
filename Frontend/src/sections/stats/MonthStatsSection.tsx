@@ -9,6 +9,7 @@ export default function MonthStatsSections(){
     const refCurrentMonth = useRef<HTMLCanvasElement>(null);
     const refNextMonth = useRef<HTMLCanvasElement>(null);
     const [load, setLoad] = useState(false);
+    const [error, setError] = useState(false);
 
     useEffect(()=>{
         setLoad(false);
@@ -17,7 +18,10 @@ export default function MonthStatsSections(){
             const prevMonth = calcMonth(1);
             const dataOfMonth = await getDataByMonth(currentMonth);
             const dataOfPrevMonth = await getDataByMonth(prevMonth);
-            if(!(dataOfMonth.materials && dataOfMonth.materials.length > 1)) return;
+            if(!(dataOfMonth.materials && dataOfMonth.materials.length > 0)) {
+                setError(true);
+                return
+            }
             const dataCurrentMonth = processData(dataOfMonth.materials);
             const dataPrevMonth = processData(dataOfPrevMonth.materials);
             if (!refCurrentMonth.current || !refNextMonth.current) return;
@@ -39,7 +43,8 @@ export default function MonthStatsSections(){
 
     return(
         <section>
-                <div className={`${load ? "flex" : "hidden"} w-full justify-center mt-8 flex-wrap gap-8 items-center lg:justify-between`}>
+                {error && <p>Los datos no han cargado</p>}
+                <div className={`${load && !error ? "flex" : "hidden"} w-full justify-center mt-8 flex-wrap gap-8 items-center lg:justify-between`}>
                     <div className="w-[45%] min-w-[300px] min-h-[320px]">
                         <h3 className="font-semibold text-xl text-center mb-4">Datos del mes de {getMonthName()}</h3>
                         <canvas ref={refCurrentMonth} />
@@ -49,7 +54,7 @@ export default function MonthStatsSections(){
                         <canvas ref={refNextMonth} />
                     </div>                
                 </div>
-            {!load && <p>Cargando...</p>}          
+            {(!load && !error) && <p>Cargando...</p>}          
         </section>
     );
 };
