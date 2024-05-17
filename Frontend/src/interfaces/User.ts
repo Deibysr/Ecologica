@@ -4,7 +4,7 @@ export interface User {
     age: number;
     isAdmin: number;
     password: string;
-    id: string
+    id?: string
 }
 
 export interface FormRegisterDataUser {

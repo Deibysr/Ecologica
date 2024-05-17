@@ -13,9 +13,9 @@ export default async function createMessage({content, forumId, token}: {content:
     try {
         const response = await fetch(`${URL}/forum/${forumId}/message`, options);
         const message = await response.json();
-        if(!message.error)
-            console.log(message)
+        if(!message.error){
             return message;
+        }
         throw new Error(message.error); 
     } catch (error) {
         console.error('Error al crear mensaje:', error);

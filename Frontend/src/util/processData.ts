@@ -6,5 +6,5 @@ export default function processData(allMaterials: Material[][]){
             sumTotal[index] += material.quantity;
         });
         return sumTotal;
-    }, Array(allMaterials[0].length).fill(0));
+    }, Array(allMaterials[0]?.length).fill(0));
 };

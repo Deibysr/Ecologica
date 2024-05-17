@@ -25,10 +25,16 @@ export default function MonthStatsSections(){
             const ctxNext = refNextMonth.current.getContext('2d');
             if (!ctxCurrent || !ctxNext) return;
             createPie(ctxCurrent, dataCurrentMonth);
-            createPie(ctxNext, dataPrevMonth);
             setLoad(true);
+            createPie(ctxNext, dataPrevMonth);
         }
         loadData();
+
+        setTimeout(()=>{
+            if(!load){
+                setLoad(true);
+            }
+        }, 5000)
     }, []);
 
     return(

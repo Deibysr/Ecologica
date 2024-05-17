@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 import { User } from "../../models/User.js";
 import encryptPassword from "../../utils/encryptPassword.js";
-import jwt from 'jsonwebtoken'; // !New: Importar jsonwebtoken
+import jwt from 'jsonwebtoken';
 import { JWT_SECRET } from "../../const/JWT_SECRET.js";
 
 

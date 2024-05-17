@@ -17,12 +17,11 @@ app.use(cors({
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
+app.get("/status", (_, res)=> res.status(200).json({msg:"All right"}))
 
 app.use("/user", userRouter);
 app.use("/forum", forumRouter);
 app.use("/stats", collectionMaterialRouter);
-
-
 
 app.listen(port, () => console.log(`Servidor conectado en el puerto ${port}`))
 

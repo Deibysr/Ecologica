@@ -1,6 +1,7 @@
 const URL = import.meta.env.PUBLIC_URL_PATH; 
 
 export default async function userLogin(email: string, password: string) {
+    console.log(email, password, URL);
     const options = {
         method: 'POST',
         headers: {
@@ -8,7 +9,6 @@ export default async function userLogin(email: string, password: string) {
         },
         body: JSON.stringify({ email, password })
     };
-
     try {
         const result = await fetch(`${URL}/user/login`, options);
         const user = await result.json();
